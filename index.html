@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inframe | Ativação de Marca com Fotos Instantâneas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0c0c0d;
+    --bg-alt: #17161a;
+    --card: #1a1a1c;
+    --border: rgba(255,255,255,0.08);
+    --gold: #c9a44c;
+    --accent: #c9a44c;
+    --gold-soft: rgba(201,164,76,0.18);
+    --text: #f2efe9;
+    --muted: #9b968d;
+    --cream: #eee6d4;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3{ font-family:'Playfair Display', serif; font-weight:600; color:var(--text); }
+  .gold{ color: var(--gold); }
+  .container{ max-width: 720px; margin:0 auto; padding: 0 28px; }
+  section{ padding: 68px 0; background: var(--bg); color: var(--text); }
+  section.alt{ background: var(--bg-alt); }
+  section.light{
+    background: var(--cream);
+    color: #1c1812;
+    --text: #1c1812;
+    --muted: #766f61;
+    --accent: #8a6423;
+    --card: #ffffff;
+    --border: rgba(0,0,0,0.08);
+  }
+  .center{ text-align:center; }
+  .eyebrow{
+    display:inline-block;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  h2{ font-size: 25px; line-height: 1.3; }
+  .lead{ color: var(--muted); font-size: 15px; margin-top: 14px; }
+
+  /* NAV */
+  nav{
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: var(--bg);
+  }
+  nav .container{ display:flex; align-items:center; justify-content:space-between; }
+  .logo{ font-family:'Playfair Display', serif; font-size:17px; letter-spacing:1.5px; color: var(--text); }
+  .logo b{ color: var(--gold); font-weight:600; }
+  .nav-link{
+    font-size: 13px;
+    color: var(--text);
+    text-decoration:none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+  }
+
+  /* BUTTONS */
+  .btn{
+    display:inline-block;
+    background: var(--gold);
+    color: #16130a;
+    font-weight: 600;
+    font-size: 14.5px;
+    padding: 15px 30px;
+    border-radius: 6px;
+    text-decoration:none;
+    letter-spacing: 0.2px;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.25);
+  }
+  .micro{ display:block; margin-top: 14px; font-size: 12px; color: var(--muted); }
+
+  /* HERO */
+  .hero{ padding: 84px 0 60px; text-align:center; }
+  .hero h1{ font-size: 32px; line-height:1.28; max-width: 440px; margin: 0 auto 18px; }
+  .hero .lead{ max-width: 420px; margin: 0 auto 32px; }
+
+  .polaroid{
+    width: 210px;
+    margin: 0 auto 40px;
+    background: #fff;
+    padding: 10px 10px 32px;
+    border-radius: 3px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+    transform: rotate(-2deg);
+  }
+  .polaroid img{ width:100%; display:block; border-radius: 1px; }
+  .polaroid span{
+    display:block;
+    text-align:center;
+    font-family:'Playfair Display', serif;
+    font-size: 12px;
+    color: #16130a;
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  /* SPLIT BLOCKS (dor) */
+  .split ul{ list-style:none; margin-top: 6px; }
+  .split li{
+    padding: 13px 0 13px 26px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14.5px;
+    position:relative;
+    color: var(--text);
+  }
+  .split li::before{
+    content:"\203A"; position:absolute; left:0; color: var(--accent); font-weight:700;
+  }
+  section p{ font-size: 14.5px; color: var(--text); margin-bottom: 14px; }
+  section .lead, section p.lead{ color: var(--muted); }
+
+  /* BENEFICIOS */
+  .benef-grid{
+    display:grid; grid-template-columns:1fr; gap:16px; margin-top: 32px;
+  }
+  .benef-card{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px;
+  }
+  .benef-card .n{
+    font-family:'Playfair Display', serif;
+    color: var(--accent);
+    font-size: 13px;
+    letter-spacing: 1px;
+    display:block;
+    margin-bottom: 10px;
+  }
+  .benef-card p{ font-size: 14px; color: var(--text); margin-bottom:0; }
+
+  /* PORTFOLIO */
+  .port-grid{
+    display:grid; grid-template-columns: repeat(2, 1fr);
+    gap: 18px 14px;
+    margin-top: 32px;
+  }
+  .port-card{
+    background:#fff;
+    padding: 8px 8px 24px;
+    border-radius: 3px;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+  }
+  .port-card .ph{
+    width:100%; aspect-ratio: 3/4; overflow:hidden; border-radius:1px;
+  }
+  .port-card img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .port-card span{
+    display:block; text-align:center; font-family:'Playfair Display', serif;
+    font-size: 11px; color:#16130a; margin-top: 8px;
+  }
+  .port-note{ text-align:center; font-size: 13px; color: var(--muted); margin-top: 26px; margin-bottom: 0; }
+  .trust-row{
+    display:flex; flex-wrap:wrap; justify-content:center; gap: 22px;
+    margin-top: 14px;
+  }
+  .trust-row span{
+    font-family:'Playfair Display', serif;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.4px;
+  }
+
+  /* OFERTA */
+  .oferta-card{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 34px 26px;
+    text-align:center;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+  }
+  .oferta-card p.intro{ font-size: 14px; text-align:left; margin-bottom: 20px; }
+  .oferta-list{ list-style:none; text-align:left; margin-bottom: 26px; }
+  .oferta-list li{
+    padding: 10px 0 10px 26px;
+    font-size: 14px;
+    position:relative;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  .oferta-list li::before{ content:"✓"; position:absolute; left:0; color:var(--accent); font-weight:700; }
+  .garantia-inline{ font-size: 12.5px; color: var(--muted); margin-top: 18px; margin-bottom: 0; }
+
+  /* FAQ */
+  details{ border-bottom: 1px solid var(--border); padding: 16px 0; }
+  summary{
+    cursor:pointer; font-size: 14.5px; color: var(--text); list-style:none;
+    display:flex; justify-content:space-between; align-items:center;
+    font-weight: 500;
+  }
+  summary::-webkit-details-marker{ display:none; }
+  summary::after{ content:"+"; color: var(--accent); font-size:18px; margin-left:16px; }
+  details[open] summary::after{ content:"–"; }
+  details p{ margin-top: 12px; font-size: 13.5px; color: var(--muted); }
+
+  /* CTA FINAL */
+  .cta-final{ text-align:center; }
+  .cta-final h2{ font-size: 24px; max-width: 420px; margin: 0 auto 26px; }
+
+  /* FOOTER */
+  footer{ padding: 44px 0 126px; text-align:center; border-top: 1px solid rgba(255,255,255,0.08); background: var(--bg); }
+  footer p{ font-size: 13px; color: var(--muted); max-width: 440px; margin: 18px auto 22px; }
+  footer .assinatura{ font-size: 11px; color: #55524c; margin-top: 22px; letter-spacing: 0.5px; }
+
+  /* WHATSAPP FLUTUANTE */
+  .whatsapp-float{
+    position: fixed; bottom: 22px; right: 22px;
+    width: 54px; height: 54px;
+    background: #21c35a;
+    border-radius: 50%;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.4);
+    text-decoration:none;
+    transition: transform .15s ease;
+    z-index: 999;
+  }
+  .whatsapp-float:hover{ transform: scale(1.06); }
+  .whatsapp-float svg{ width: 26px; height: 26px; }
+
+  @media (min-width: 680px){
+    .hero h1{ font-size: 44px; max-width: 560px; }
+    .hero .lead{ max-width: 480px; }
+    h2{ font-size: 32px; }
+    .benef-grid{ grid-template-columns: 1fr 1fr; }
+    .polaroid{ width: 260px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo">INFRAME <b>|</b> ATIVAÇÃO</div>
+    <a class="nav-link" href="https://wa.me/5548996733855?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20ativa%C3%A7%C3%A3o%20de%20marca%20com%20fotos%20instant%C3%A2neas%20da%20Inframe." target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow">Ativação de Marca</span>
+    <h1>Sua marca não vira brinde, vira <span class="gold">lembrança</span>.</h1>
+    <p class="lead">Fotos instantâneas personalizadas com a identidade da sua marca, pra eventos, feiras e lançamentos que os convidados guardam, e compartilham, de verdade.</p>
+
+    <div class="polaroid">
+      <div class="ph"><img src="assets-lp/case-libresse.jpeg" alt="Foto instantânea personalizada Inframe"></div>
+      <span>Inframe · Instax</span>
+    </div>
+
+    <a class="btn" href="https://wa.me/5548996733855?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20ativa%C3%A7%C3%A3o%20de%20marca%20com%20fotos%20instant%C3%A2neas%20da%20Inframe." target="_blank" rel="noopener">Fale no WhatsApp agora</a>
+    <span class="micro">Resposta rápida · Orçamento sob medida pro seu evento</span>
+  </div>
+</header>
+
+<!-- PORTFOLIO (cases reais, logo depois do hero) -->
+<section class="light">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Portfólio</span>
+      <h2>Cases reais de ativações Inframe</h2>
+    </div>
+    <div class="port-grid">
+      <div class="port-card"><div class="ph"><img src="assets-lp/case-ginga.jpeg" alt="Ativação Inframe para a marca Ginga" loading="lazy"></div><span>Ginga</span></div>
+      <div class="port-card"><div class="ph"><img src="assets-lp/case-conquista.jpeg" alt="Ativação Inframe para a marca Conquista" loading="lazy"></div><span>Conquista</span></div>
+      <div class="port-card"><div class="ph"><img src="assets-lp/case-libresse.jpeg" alt="Ativação Inframe para a marca Libresse" loading="lazy"></div><span>Libresse</span></div>
+      <div class="port-card"><div class="ph"><img src="assets-lp/case-beyond-pet.jpeg" alt="Ativação Inframe Pet Day Beyond Residence" loading="lazy"></div><span>Beyond Residence</span></div>
+      <div class="port-card"><div class="ph"><img src="assets-lp/case-palavraviva-1.jpeg" alt="Ativação Inframe Palavra Viva Church" loading="lazy"></div><span>Palavra Viva Church</span></div>
+      <div class="port-card"><div class="ph"><img src="assets-lp/case-palavraviva-2.jpeg" alt="Ativação Inframe Palavra Viva Church display" loading="lazy"></div><span>Palavra Viva Church</span></div>
+    </div>
+    <p class="port-note">Marcas que já ativaram com a Inframe</p>
+    <div class="trust-row">
+      <span>Ginga</span><span>Conquista</span><span>Libresse</span><span>Beyond Residence</span><span>Palavra Viva Church</span>
+    </div>
+  </div>
+</section>
+
+<!-- DOR -->
+<section>
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">O problema</span>
+      <h2>Todo evento corporativo enfrenta o mesmo desafio</h2>
+    </div>
+    <div class="split" style="margin-top:32px;">
+      <ul>
+        <li>O brinde que sobra na mesa e vira lixo no fim do evento</li>
+        <li>A dificuldade de provar, com dado concreto, o retorno de uma ativação</li>
+        <li>O photobooth padrão que não representa em nada a identidade da marca</li>
+        <li>O evento que gera pouco ou nenhum conteúdo espontâneo nas redes sociais</li>
+        <li>A sensação de que o convidado esquece a marca assim que sai da sala</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUCAO -->
+<section class="light">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">A solução</span>
+      <h2>O momento da foto vira um ativo de marca</h2>
+    </div>
+    <div style="margin-top: 28px;">
+      <p>A Inframe monta uma estação de fotos instantâneas personalizada com a sua marca, operada por uma equipe especializada durante todo o evento.</p>
+      <p>O convidado tira a foto, recebe na hora o retrato impresso com a identidade visual da empresa, e sai com um objeto físico na mão, não com mais um brinde descartável.</p>
+      <p>É esse objeto físico que muda o jogo. Ele fica na carteira, na geladeira, no mural de casa. E quando o convidado registra esse momento no story, a marca aparece de forma natural, sem parecer publicidade.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section class="alt">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Por que a Inframe</span>
+      <h2>Uma ativação que continua trabalhando depois do evento</h2>
+    </div>
+    <div class="benef-grid">
+      <div class="benef-card"><span class="n">01</span><p>Identidade visual da sua marca em cada foto impressa, elevando a percepção premium do evento</p></div>
+      <div class="benef-card"><span class="n">02</span><p>Equipe própria cuida de toda a operação no local, sem sobrecarregar seu time</p></div>
+      <div class="benef-card"><span class="n">03</span><p>Objeto físico que o convidado guarda, ao contrário de brindes que somem em uma semana</p></div>
+      <div class="benef-card"><span class="n">04</span><p>Conteúdo orgânico gerado pelos próprios convidados nos stories, ampliando o alcance sem verba extra de mídia</p></div>
+      <div class="benef-card"><span class="n">05</span><p>Experiência que reforça posicionamento premium, sem parecer ativação genérica de feira</p></div>
+      <div class="benef-card"><span class="n">06</span><p>Galeria digital das fotos do evento, pra reaproveitar em outras peças de marketing</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- OFERTA -->
+<section class="light">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Como funciona</span>
+      <h2>Uma ativação sob medida pro seu evento</h2>
+    </div>
+    <div class="oferta-card" style="margin-top:28px;">
+      <p class="intro">Como cada ativação é montada de acordo com o formato do evento, número de convidados e complexidade da personalização, não trabalhamos com pacote fechado nesta página. O orçamento é feito em conversa direta pelo WhatsApp.</p>
+      <ul class="oferta-list">
+        <li>Estação de fotos instantâneas personalizada com a identidade da sua marca</li>
+        <li>Equipe especializada cuidando de toda a operação durante o evento</li>
+        <li>Fotos impressas na hora, entregues aos convidados</li>
+        <li>Galeria digital com todos os registros do evento</li>
+      </ul>
+      <a class="btn" href="https://wa.me/5548996733855?text=Ol%C3%A1!%20Quero%20pedir%20um%20or%C3%A7amento%20para%20ativa%C3%A7%C3%A3o%20de%20marca%20com%20a%20Inframe." target="_blank" rel="noopener">Peça seu orçamento agora</a>
+      <p class="garantia-inline">✦ Garantia operacional: equipamento testado, equipe própria treinada e suporte completo durante todo o evento.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="light">
+  <div class="container">
+    <div class="center"><span class="eyebrow">Dúvidas</span><h2>Perguntas frequentes</h2></div>
+    <div style="margin-top: 28px;">
+      <details>
+        <summary>Já temos photobooth no nosso evento, o que muda?</summary>
+        <p>A diferença não é a foto, é o que sobra depois dela. Photobooth entrega uma imagem, a Inframe entrega um objeto físico com a marca que o convidado guarda e compartilha.</p>
+      </details>
+      <details>
+        <summary>Como funciona a instalação no dia do evento?</summary>
+        <p>Nossa equipe monta toda a estação antes do início e opera do começo ao fim, sem que você precise se preocupar com a parte técnica.</p>
+      </details>
+      <details>
+        <summary>Precisa de espaço ou infraestrutura específica?</summary>
+        <p>Um espaço reservado e ponto de energia já são suficientes. Ajustamos a montagem conforme o local.</p>
+      </details>
+      <details>
+        <summary>Como funciona o orçamento?</summary>
+        <p>Cada ativação é única. Você conversa com a gente pelo WhatsApp, conta os detalhes do evento, e montamos uma proposta sob medida.</p>
+      </details>
+      <details>
+        <summary>Atendem eventos fora de Florianópolis?</summary>
+        <p>Conte pra gente onde é o seu evento pelo WhatsApp que confirmamos a cobertura.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="container">
+    <span class="eyebrow">Vamos começar</span>
+    <h2>Sua marca já está no evento. A pergunta é se ela vai continuar circulando depois.</h2>
+    <a class="btn" href="https://wa.me/5548996733855?text=Ol%C3%A1!%20Quero%20montar%20a%20ativa%C3%A7%C3%A3o%20de%20marca%20do%20meu%20pr%C3%B3ximo%20evento%20com%20a%20Inframe." target="_blank" rel="noopener">Fale com a Inframe no WhatsApp</a>
+  </div>
+</section>
+
+<!-- FOOTER / PS -->
+<footer>
+  <div class="container">
+    <div class="logo center">INFRAME <b>|</b> ATIVAÇÃO</div>
+    <p>Enquanto brinde é descartado, a lembrança da Inframe continua circulando depois que o evento termina.</p>
+    <div class="assinatura">Florianópolis, SC · Inframe Experiências Premium</div>
+  </div>
+</footer>
+
+<!-- BOTAO FLUTUANTE WHATSAPP -->
+<a class="whatsapp-float" href="https://wa.me/5548996733855?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20ativa%C3%A7%C3%A3o%20de%20marca%20com%20fotos%20instant%C3%A2neas%20da%20Inframe." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 32 32" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16.001 3C9.11 3 3.5 8.609 3.5 15.5c0 2.28.61 4.42 1.68 6.26L3 29l7.44-2.14a12.44 12.44 0 0 0 5.56 1.34h.001C22.89 28.2 28.5 22.6 28.5 15.7 28.5 8.81 22.9 3 16.001 3zm0 22.6h-.001a10.4 10.4 0 0 1-5.3-1.45l-.38-.22-4.42 1.27 1.29-4.31-.25-.4a10.36 10.36 0 0 1-1.6-5.51c0-5.76 4.69-10.45 10.46-10.45 2.79 0 5.42 1.09 7.39 3.06a10.37 10.37 0 0 1 3.06 7.4c0 5.76-4.69 10.6-10.24 10.6zm5.73-7.83c-.31-.16-1.85-.91-2.14-1.02-.29-.1-.5-.16-.71.16-.21.31-.81 1.02-1 1.23-.18.21-.37.23-.68.08-.31-.16-1.32-.49-2.51-1.56-.93-.83-1.55-1.86-1.74-2.17-.18-.31-.02-.48.14-.63.14-.14.31-.37.47-.55.16-.18.21-.31.31-.52.1-.21.05-.39-.02-.55-.08-.16-.71-1.71-.97-2.34-.26-.62-.52-.54-.71-.55h-.6c-.21 0-.55.08-.84.39-.29.31-1.1 1.08-1.1 2.63 0 1.55 1.13 3.05 1.29 3.26.16.21 2.22 3.39 5.38 4.75.75.32 1.34.51 1.8.66.76.24 1.45.21 2 .13.61-.09 1.85-.76 2.11-1.49.26-.73.26-1.36.18-1.49-.08-.13-.29-.21-.6-.37z"/>
+  </svg>
+</a>
+
+</body>
+</html>
